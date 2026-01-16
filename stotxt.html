@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Speech to Text</title>
+  <style>
+    body { font-family: Arial; text-align: center; margin-top: 50px; }
+    button { font-size: 20px; padding: 10px 20px; }
+    textarea { width: 80%; height: 150px; margin-top: 20px; font-size: 16px; }
+  </style>
+</head>
+<body>
+
+<h2>Speech to Text Converter</h2>
+<button onclick="startSpeech()">Start Speaking</button>
+<br><br>
+<textarea id="output" placeholder="Recognized text will appear here..."></textarea>
+
+<script>
+function startSpeech() {
+  const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+  recognition.lang = "en-US";
+  recognition.start();
+
+  recognition.onresult = function(event) {
+    document.getElementById("output").value =
+      event.results[0][0].transcript;
+  };
+}
+</script>
+
+</body>
+</html>
